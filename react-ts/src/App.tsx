@@ -10,14 +10,20 @@ function App() {
         <TitleApp title = {'My Friends'}/>
         Article 1
         <Rating value = {5}/>
-        <Accordion accordionTitle = {'Click to see'}/>
-            Article 2
+        <Accordion accordionTitle = {'Menu'} collapsed = {false}/>
+        <Accordion accordionTitle = {'User'} collapsed = {true}/>
+
+        Article 2
         <Rating value = {2}/>
     </div>
   );
 }
 
-function TitleApp(props: any) {
+type TitleAppPropsType = {
+    title: string
+}
+
+function TitleApp(props: TitleAppPropsType) {
     return <h1>{props.title}</h1>
 }
 
