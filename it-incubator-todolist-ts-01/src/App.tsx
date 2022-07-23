@@ -1,44 +1,56 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import ToDoLIst from './ToDoLIst';
 import {TaskType} from './ToDoLIst'
 
-// import ToDoLIst, {TaskType} from "./ToDoLIst";
-//
-// function App() {
-//     const tasks: Array<TaskType> = [
-//         {id: 1, title: 'HTML', isDone: true},
-//         {id: 2, title: 'CSS', isDone: true},
-//         {id: 3, title: 'TJS/S', isDone: false},
-//     ]
-//     return (<div>
-//         <ToDoLIst title={'test1'} tasks={tasks}
-//         />
-//
-//
-//     </div>)
-// }
-
-// type TaskType = {
-//     id: number,
-//     isDone: boolean,
-//     title:string,
-// }
+export type FilterValuesType = 'all' | 'completed' | 'active'
 
 
 function App() {
-    const tasks: Array<TaskType> = [{id: 1, isDone: true, title: 'HTML',}, {id: 2, isDone: true, title: 'CSS',}, {
-        id: 3,
-        isDone: false,
-        title: 'REACT',
-    }]
 
+    const [tasks, setTasks] = useState<Array<TaskType>>([
+        {id: 1, title: 'HTML&CSS', isDone: true,},
+        {id: 2, title: 'JS', isDone: true,},
+        {id: 3, title: 'ReactJS', isDone: false,},
+        {id: 4, title: 'Redux', isDone: false,}
+    ]);
+    const [filter, setFilter] = useState<FilterValuesType>('all')
+
+
+    function removeTask(id: number) {
+        let filtredTasks = tasks.filter(item => {
+            return item.id !== id
+        })
+        setTasks(filtredTasks);
+    }
+
+    // ------------------------------------------
+
+    function changeFilter(value: FilterValuesType) {
+        setFilter(value)
+    }
+
+    let tasksForToDoList = tasks;
+    if (filter == 'completed') {
+        tasksForToDoList = tasks.filter(item => item.isDone === true)
+    }
+    if (filter == 'active') {
+        tasksForToDoList = tasks.filter(item => item.isDone === false)
+    }
+
+    // ------------------------------------------
 
     return (
-        <div>
-            <ToDoLIst title={'Learn'}  tasks = {tasks} />
-            {/*<ToDoLIst title={'watch'} tasks = {tasks}/>*/}
-            {/*<ToDoLIst title={'homework'} tasks = {tasks}/>*/}
+        <div className='App'>
+            <ToDoLIst
+                title={'Learn'}
+                tasks={tasksForToDoList}
+                removeTask={removeTask}
+                setFilter={setFilter}
+                // showAllTasks={showAllTasks}
+                // showActiveTasks = {showActiveTasks}
+                // showCompletedTasks = {showCompletedTasks}
+            />
         </div>
 
     );
