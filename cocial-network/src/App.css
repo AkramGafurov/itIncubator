@@ -9,8 +9,9 @@
   margin: 0 auto;
 }
 
-.content{
+.app-wrapper-content{
   grid-area: c;
   background-color: blue;
 }
+
 
