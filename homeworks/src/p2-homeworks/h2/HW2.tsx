@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import Affairs from './Affairs'
 
 // types
-export type AffairPriorityType = any // need to fix any
+export type AffairPriorityType = 'low'|'middle'|'high' // need to fix any
 export type AffairType = any // need to fix any
 export type FilterType = 'all' | AffairPriorityType
 
@@ -15,16 +15,18 @@ const defaultAffairs: any = [ // need to fix any
     {_id: 5, name: 'html & css', priority: 'middle'},
 ]
 
-// pure helper functions
+// pure helper functions функция фильтрации
 export const filterAffairs = (affairs: any, filter: any): any => { // need to fix any
     if (filter === 'all') return affairs
     else return // need to fix
 }
+
 export const deleteAffair = (affairs: any, _id: any): any => { // need to fix any
     return // need to fix
 }
 
 function HW2() {
+
     const [affairs, setAffairs] = useState<any>(defaultAffairs) // need to fix any
     const [filter, setFilter] = useState<FilterType>('all')
 
