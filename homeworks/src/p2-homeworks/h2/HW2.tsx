@@ -3,7 +3,11 @@ import Affairs from './Affairs'
 
 // types
 export type AffairPriorityType = 'low'|'middle'|'high'; // need to fix any
-export type AffairType = {_id: number, name: string, priority: FilterType};
+export type AffairType = {
+    _id: number, 
+    name: string,
+    priority: FilterType
+};
 // need to fix any
 export type FilterType = 'all' | AffairPriorityType;
 
@@ -20,15 +24,18 @@ const defaultAffairs: Array<AffairType> = [ // need to fix any
 // pure helper functions функция фильтрации
 
 export const filterAffairs = (affairs: Array<AffairType>, filter: FilterType): Array<AffairType> => { // need to fix any
-    if (filter === 'all') return affairs
-    else return // need to fix
-}
+    // if (filter === 'all') return affairs
+    // else return // need to fix
+    return affairs
 
+}
 
 //функция удаления пунктов
 export const deleteAffair = (affairs: Array<AffairType>, _id: number): Array<AffairType> => { // need to fix any
-    return // need to fix
+    return affairs.filter((item)=>item._id !== _id)
 }
+
+
 
 function HW2() {
 
@@ -46,6 +53,7 @@ function HW2() {
             homeworks 2
 
             {/*should work (должно работать)*/}
+            
             <Affairs
                 data={filteredAffairs}
                 setFilter={setFilter}
