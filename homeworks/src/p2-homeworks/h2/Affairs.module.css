@@ -1,3 +1,38 @@
-.someClass {
+.affairSection {
+  background-image: url('./src/media/background.jpg');
+  background-size:contain;
+  padding: 20px;
+}
+.affairContent {
+  padding: 20px;
+}
+.affairBlock{
+  margin-bottom: 10px;
+}
+.filterBtn,
+.btnDelete {
+  background-color: transparent; 
+  border: 2px solid #555555;
+  color: black;
+  padding: 3px;
+  border-radius: 3px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-right: 3px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
 
+.btnDelete {
+  padding: 0px;
+  height: 15px;
+  width: 15px;
+  font-size: 10px;
+}
+.filterBtn:hover,
+.btnDelete:hover {
+  background-color: #555555;
+  color: white;
 }
