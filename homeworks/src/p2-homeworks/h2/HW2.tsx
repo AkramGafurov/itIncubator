@@ -24,10 +24,15 @@ const defaultAffairs: Array<AffairType> = [ // need to fix any
 // pure helper functions функция фильтрации
 
 export const filterAffairs = (affairs: Array<AffairType>, filter: FilterType): Array<AffairType> => { // need to fix any
-    // if (filter === 'all') return affairs
-    // else return // need to fix
-    return affairs
-
+    if (filter === 'low'){
+        return affairs.filter(item=>item.priority === 'low')
+    }else if(filter === 'middle'){
+        return affairs.filter(item=>item.priority === 'middle')
+    }else if (filter === 'high'){
+        return affairs.filter(item=>item.priority === 'high')
+    } else {
+        return affairs
+    }// need to fix
 }
 
 //функция удаления пунктов
@@ -51,8 +56,6 @@ function HW2() {
         <div>
             <hr/>
             homeworks 2
-
-            {/*should work (должно работать)*/}
             
             <Affairs
                 data={filteredAffairs}
