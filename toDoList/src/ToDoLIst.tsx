@@ -1,40 +1,67 @@
 import React from "react";
-import {FC} from 'react'
+import {FC, MouseEvent} from 'react'
 import {FilterValuesType} from './App'
+import {Button} from './components/Button'
+import {Input} from './components/Input'
+
+
 
 type TodoListPropsType = {
     title: string,
     tasks: Array<TaskType>,
-    deleteTask: (id:number) => void,
-    changeFilter: (filter:FilterValuesType) => void
+    deleteTask: (id:string) => void,
+    changeFilter: (filter:FilterValuesType) => void,
+    addTask: () => void,
+    userInput: string,
+    setUserInput: (UserInput:string) => void
+
+
 }
 
 export type  TaskType = {
-    id: number,
+    id: string,
     title: string,
     isDone: boolean,
 }
 
 const ToDoLIst/*: FC<TodoListPropsType> можно типизировать и так*/ = (props: TodoListPropsType) => {
+
+    const deleteHandler = (id: string)=>{
+        props.deleteTask(id)
+    }
+
+
     const tasksList = props.tasks.map(item => {
-        return <li><input type="checkbox" checked={item.isDone}/><span>{item.title}</span>
-        <button onClick = {()=>{props.deleteTask(item.id)}}>x</button></li>
-    })
+        return (
+        <li><input type="checkbox" checked={item.isDone}/><span>{item.title}</span>
+        <Button name = 'x' callBack={()=>{deleteHandler(item.id)}}/>
+        {/* <button onClick = {()=>{deleteHandler(item.id)}}>x</button> */}
+        </li>
+    )
+    }
+    )
     
+//-------функция обработки нажатия кнопок фильтрации-------
+    const onClickFilterHandler = (filter: FilterValuesType) =>{
+            {props.changeFilter(filter)}  
+    }
+
     return (
         <div>
             <h3>{props.title}</h3>
             <div>
-                <input/>
-                <button>+</button>
+                <Input userInput={props.userInput} setUserInput = {props.setUserInput} addTask={props.addTask}/>
+                <Button name = {'+'} callBack = {props.addTask}/>
             </div>
             <ul>
                 {tasksList}
             </ul>
             <div>
-                <button onClick ={()=>props.changeFilter('all')}>All</button>
-                <button onClick ={()=>props.changeFilter('active')}>Active</button>
-                <button onClick ={()=>props.changeFilter('completed')}>Completed</button>
+
+                <Button name={'All'} callBack ={()=>onClickFilterHandler('all')} />
+                <Button name={'Active'} callBack ={()=>onClickFilterHandler('active')} />
+                 <Button name={'Completed'} callBack ={()=>onClickFilterHandler('completed')} />
+               
             </div>
         </div>
     );

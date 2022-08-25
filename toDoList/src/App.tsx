@@ -1,34 +1,24 @@
 import { ftruncate } from 'fs';
 import React, {useState} from 'react';
+import { v1 } from 'uuid';
 import './App.css';
 import ToDoLIst from './ToDoLIst';
 import {TaskType} from './ToDoLIst'
-
 export type FilterValuesType = 'all' |'active'| 'completed'  
 
-// export function Counter(){
-    // let arr = useState(5);
-    // let number = arr[0];
-    // let setState = arr[1];
-
-    // return(
-    //     <div onClick = {()=>setState(number+1)}>{number}</div>
-    // )
-// }
 
 function App() {
  
-    const arr = useState([
-        {id: 1, title: 'HTML&CSS', isDone: true,},
-        {id: 2, title: 'JS', isDone: true,},
-        {id: 3, title: 'ReactJS', isDone: false,},
-        {id: 4, title: 'Redux', isDone: false,}
+    const [tasks, setTasks] = useState([
+        {id: v1(), title: 'HTML&CSS', isDone: true,},
+        {id: v1(), title: 'JS', isDone: true,},
+        {id: v1(), title: 'ReactJS', isDone: false,},
+        {id: v1(), title: 'Redux', isDone: false,},
+        {id: v1(), title: 'GraphQL', isDone: false,}
+
     ]);
 
-    let tasks = arr[0];
-    let setTasks = arr[1];
-
-    function deleteTask(id:number) {
+    function deleteTask(id:string) {
         let filtredTasks = tasks.filter(item => item.id != id);
         setTasks(filtredTasks)
     }
@@ -39,7 +29,20 @@ function App() {
         setFilter(filter)
     }
 
+    // -------добавление сообщений через инпут-------
+    let [userInput, setUserInput] = useState('');
+    
+
+    const addTask = () => {
+        let newTask = {id: v1(), title: userInput, isDone: true,}
+        setTasks([newTask, ...tasks])
+        setUserInput('')
+    }
+
+    // -------проверка фильтров-------
+
     let taskForToDoList = tasks;
+
     if (filter == 'completed'){
         taskForToDoList = tasks.filter(item => item.isDone === true)
     } 
@@ -59,6 +62,9 @@ function App() {
                 tasks={taskForToDoList}
                 deleteTask={deleteTask}
                 changeFilter = {changeFilter}
+                addTask = {addTask}
+                userInput = {userInput}
+                setUserInput = {setUserInput}
             />
         </div>
 
