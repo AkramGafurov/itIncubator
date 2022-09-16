@@ -1,8 +1,9 @@
 import React from "react";
-
+import s from './button.module.css'
 type buttonPropsType = {
   name: string,
   callBack: () => void,
+  className: string,
 }
 
 export const Button = (props: buttonPropsType) => {
@@ -12,7 +13,7 @@ export const Button = (props: buttonPropsType) => {
   }
 
   return(
-    <button onClick={buttonHandler}>{props.name}</button>
+    <button className={props.className=='activeButton'?s.active:''} onClick={buttonHandler}>{props.name}</button>
   )
   
 }
